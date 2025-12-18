@@ -3,14 +3,13 @@
 //
 
 #include "Club.hpp"
-
 #include <iostream>
 
-Club::Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper) : name_(name), timeKeeper_(timeKeeper)
+Club::Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, const std::shared_ptr<spdlog::logger>& logger) : name_(name), timeKeeper_(timeKeeper), logger_(logger)
 {
-  std::cout << "Club " << name_ << " created." << std::endl;
-  timeKeeper_->scheduleEvent(10, [this]() { this->handleTraining(); });
-  timeKeeper_->scheduleEvent(20, [this]() { this->handleTransfers(); });
+  logger_->info("Creating club: {}", name_);
+  timeKeeper_->scheduleEvent(0, [this]() { this->handleTraining(); });
+  timeKeeper_->scheduleEvent(0, [this]() { this->handleTransfers(); });
 }
 
 void Club::handleTraining()

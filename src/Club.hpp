@@ -11,7 +11,7 @@
 
 class Club {
 public:
-  explicit Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper);
+  explicit Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, const std::shared_ptr<spdlog::logger>& logger);
 
   void handleTraining();
   void handleTransfers();
@@ -19,6 +19,7 @@ public:
 private:
   std::string name_;
   std::shared_ptr<TimeKeeper> timeKeeper_;
+  std::shared_ptr<spdlog::logger> logger_;
 };
 
 
