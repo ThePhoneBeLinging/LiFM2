@@ -12,6 +12,16 @@ Club::Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeepe
   timeKeeper_->scheduleEvent(0, [this]() { this->handleTransfers(); });
 }
 
+void Club::setUuid(const std::string& uuid)
+{
+  uuid_ = uuid;
+}
+
+std::string Club::getUuid() const
+{
+  return uuid_;
+}
+
 void Club::handleTraining()
 {
   timeKeeper_->scheduleEvent(timeKeeper_->getCurrentSeconds() + 10, [this]() { this->handleTraining(); });

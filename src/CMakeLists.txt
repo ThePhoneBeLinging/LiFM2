@@ -8,9 +8,21 @@ add_library(LibLiFM
         Time/TimeKeeper.cpp
         Time/TimeKeeper.hpp
         Time/TimeEvent.hpp
-        Club.cpp
-        Club.hpp
+        models/Club.cpp
+        models/League.cpp
+        models/League.hpp
+        util/ModelStorage.cpp
+        util/ModelStorage.hpp
+        models/Player.cpp
+        models/Player.hpp
+        util/MockDataCreator.cpp
+        util/MockDataCreator.hpp
+        util/DataCreator.hpp
+
 )
 
-target_link_libraries(LibLiFM PUBLIC spdlog::spdlog)
+target_include_directories(LibLiFM PRIVATE .)
 target_include_directories(LibLiFM PUBLIC include)
+target_link_libraries(LibLiFM PUBLIC spdlog::spdlog
+
+)
