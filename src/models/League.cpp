@@ -24,6 +24,7 @@ std::string League::getUuid() const
 void League::addClub(const std::string& clubId)
 {
   clubIds_.insert(clubId);
+  leagueTable_[clubId] = 0;
 }
 
 void League::removeClub(const std::string& clubId)
@@ -34,6 +35,16 @@ void League::removeClub(const std::string& clubId)
 std::vector<std::string> League::getClubIds()
 {
   return {clubIds_.begin(), clubIds_.end()};
+}
+
+void League::updateLeagueTable(const std::string& clubId, const int points)
+{
+  leagueTable_[clubId] += points;
+}
+
+int League::getPoints(const std::string& clubId)
+{
+  return leagueTable_[clubId];
 }
 
 void League::createMatches(ModelStorage* modelStorage)

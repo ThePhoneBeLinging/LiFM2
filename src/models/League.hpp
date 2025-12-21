@@ -18,12 +18,15 @@ public:
   void addClub(const std::string& clubId);
   void removeClub(const std::string& clubId);
   std::vector<std::string> getClubIds();
+  void updateLeagueTable(const std::string& clubId, int points);
+  int getPoints(const std::string& clubId);
 
 private:
   void createMatches(ModelStorage* modelStorage);
 
   std::string uuid_;
   std::unordered_set<std::string> clubIds_;
+  std::unordered_map<std::string, int> leagueTable_;
 
   std::string name_;
   std::shared_ptr<spdlog::logger> logger_;

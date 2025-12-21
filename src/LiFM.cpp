@@ -16,9 +16,15 @@ void LiFM::launch()
   auto modelStorage = std::make_unique<ModelStorage>(logger);
   auto leagueId = MockDataCreator::createSuperliga(timeKeeper, modelStorage.get(), logger);
 
+  auto league = modelStorage->getLeague(leagueId);
 
   for (int i = 0; i < 100000; i++)
   {
     timeKeeper->advance();
+  }
+  for (const auto& club : league->getClubIds())
+  {
+    auto clubModel = modelStorage->getClub(club);
+    logger->info("Club: {} has {} points", clubModel->getName(), league->getPoints(club));
   }
 }
