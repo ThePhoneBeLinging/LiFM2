@@ -17,7 +17,10 @@ add_library(LibLiFM
         models/Player.hpp
         util/MockDataCreator.cpp
         util/MockDataCreator.hpp
-        util/DataCreator.hpp
+        util/MatchSim.cpp
+        util/MatchSim.hpp
+        util/RandomNumberGenerator.hpp
+        models/Match.hpp
 
 )
 

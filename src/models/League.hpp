@@ -9,9 +9,10 @@
 #include "spdlog/spdlog.h"
 #include "Time/TimeKeeper.hpp"
 
+class ModelStorage;
 class League {
 public:
-  League(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, const std::shared_ptr<spdlog::logger>& logger);
+  League(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, ModelStorage* modelStorage, const std::shared_ptr<spdlog::logger>& logger);
   void setUuid(const std::string& uuid);
   std::string getUuid() const;
   void addClub(const std::string& clubId);
@@ -19,6 +20,8 @@ public:
   std::vector<std::string> getClubIds();
 
 private:
+  void createMatches(ModelStorage* modelStorage);
+
   std::string uuid_;
   std::unordered_set<std::string> clubIds_;
 

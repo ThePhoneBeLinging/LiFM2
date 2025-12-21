@@ -57,11 +57,9 @@ std::string Club::getName() const
 void Club::handleTraining(ModelStorage* modelStorage)
 {
   timeKeeper_->scheduleEvent(timeKeeper_->getCurrentSeconds() + 10, [this, modelStorage]() { this->handleTraining(modelStorage); });
-  std::cout << "Club " << name_ << " is handling training at time " << timeKeeper_->getCurrentSeconds() << std::endl;
 }
 
 void Club::handleTransfers(ModelStorage* modelStorage)
 {
   timeKeeper_->scheduleEvent(timeKeeper_->getCurrentSeconds() + 20, [this, modelStorage]() { this->handleTransfers(modelStorage); });
-  std::cout << "Club " << name_ << " is handling transfers at time " << timeKeeper_->getCurrentSeconds() << std::endl;
 }
