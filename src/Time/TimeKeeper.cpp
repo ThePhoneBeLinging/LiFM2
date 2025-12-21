@@ -3,8 +3,8 @@
 //
 
 #include "TimeKeeper.hpp"
-
 #include <utility>
+#include "util/ModelStorage.hpp"
 
 TimeKeeper::TimeKeeper(const std::shared_ptr<spdlog::logger>& logger) : logger_(logger)
 {
@@ -23,7 +23,7 @@ void TimeKeeper::advance()
   events_.pop();
 }
 
-void TimeKeeper::scheduleEvent(const int64_t atSeconds, std::function<void()> callback)
+void TimeKeeper::scheduleEvent(const int64_t atSeconds, const std::function<void()>& callback)
 {
   if (atSeconds < seconds_)
   {

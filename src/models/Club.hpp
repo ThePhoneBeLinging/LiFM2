@@ -5,21 +5,30 @@
 #ifndef CLUB_HPP
 #define CLUB_HPP
 #include <string>
+#include <unordered_set>
+#include "Time/TimeKeeper.hpp"
 
-#include "../Time/TimeKeeper.hpp"
-
-
+class ModelStorage;
 class Club {
 public:
-  explicit Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, const std::shared_ptr<spdlog::logger>& logger);
+  explicit Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, ModelStorage* modelStorage, const std::shared_ptr<spdlog::logger>& logger);
   void setUuid(const std::string& uuid);
-  std::string getUuid() const;
+  void addPlayer(const std::string& playerId);
+  void removePlayer(const std::string& playerId);
+  void setLeague(const std::string& leagueId);
 
-  void handleTraining();
-  void handleTransfers();
+  std::string getUuid() const;
+  std::string getLeagueId();
+  std::vector<std::string> getPlayerIds();
+  std::string getName() const;
+
+  void handleTraining(ModelStorage* modelStorage);
+  void handleTransfers(ModelStorage* modelStorage);
 
 private:
   std::string uuid_;
+  std::string leagueId_;
+  std::unordered_set<std::string> playerIds_;
   std::string name_;
   std::shared_ptr<TimeKeeper> timeKeeper_;
   std::shared_ptr<spdlog::logger> logger_;

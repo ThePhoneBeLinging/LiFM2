@@ -5,11 +5,13 @@
 #include "Club.hpp"
 #include <iostream>
 
-Club::Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, const std::shared_ptr<spdlog::logger>& logger) : name_(name), timeKeeper_(timeKeeper), logger_(logger)
+#include "util/ModelStorage.hpp"
+
+Club::Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, ModelStorage* modelStorage, const std::shared_ptr<spdlog::logger>& logger) : name_(name), timeKeeper_(timeKeeper), logger_(logger)
 {
   logger_->info("Creating club: {}", name_);
-  timeKeeper_->scheduleEvent(0, [this]() { this->handleTraining(); });
-  timeKeeper_->scheduleEvent(0, [this]() { this->handleTransfers(); });
+  timeKeeper_->scheduleEvent(0, [this, modelStorage]() { this->handleTraining(modelStorage); });
+  timeKeeper_->scheduleEvent(0, [this, modelStorage]() { this->handleTransfers(modelStorage); });
 }
 
 void Club::setUuid(const std::string& uuid)
@@ -17,19 +19,49 @@ void Club::setUuid(const std::string& uuid)
   uuid_ = uuid;
 }
 
+void Club::addPlayer(const std::string& playerId)
+{
+  playerIds_.insert(playerId);
+}
+
+void Club::removePlayer(const std::string& playerId)
+{
+  playerIds_.erase(playerId);
+}
+
+void Club::setLeague(const std::string& leagueId)
+{
+  leagueId_ = leagueId;
+}
+
 std::string Club::getUuid() const
 {
   return uuid_;
 }
 
-void Club::handleTraining()
+std::string Club::getLeagueId()
 {
-  timeKeeper_->scheduleEvent(timeKeeper_->getCurrentSeconds() + 10, [this]() { this->handleTraining(); });
+  return leagueId_;
+}
+
+std::vector<std::string> Club::getPlayerIds()
+{
+  return std::vector<std::string>(playerIds_.begin(), playerIds_.end());
+}
+
+std::string Club::getName() const
+{
+  return name_;
+}
+
+void Club::handleTraining(ModelStorage* modelStorage)
+{
+  timeKeeper_->scheduleEvent(timeKeeper_->getCurrentSeconds() + 10, [this, modelStorage]() { this->handleTraining(modelStorage); });
   std::cout << "Club " << name_ << " is handling training at time " << timeKeeper_->getCurrentSeconds() << std::endl;
 }
 
-void Club::handleTransfers()
+void Club::handleTransfers(ModelStorage* modelStorage)
 {
-  timeKeeper_->scheduleEvent(timeKeeper_->getCurrentSeconds() + 20, [this]() { this->handleTransfers(); });
+  timeKeeper_->scheduleEvent(timeKeeper_->getCurrentSeconds() + 20, [this, modelStorage]() { this->handleTransfers(modelStorage); });
   std::cout << "Club " << name_ << " is handling transfers at time " << timeKeeper_->getCurrentSeconds() << std::endl;
 }

@@ -15,8 +15,8 @@ class TimeKeeper {
 public:
   explicit TimeKeeper(const std::shared_ptr<spdlog::logger>& logger);
   void advance();
-  void scheduleEvent(int64_t atSeconds, std::function<void()> callback);
-  int64_t getCurrentSeconds() const;
+  void scheduleEvent(int64_t atSeconds, const std::function<void()>& callback);
+  [[nodiscard]] int64_t getCurrentSeconds() const;
 private:
   std::shared_ptr<spdlog::logger> logger_;
   int64_t seconds_ = 0;
