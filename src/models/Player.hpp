@@ -13,7 +13,7 @@ class Player {
 public:
   Player(const std::string& name, int age, const std::shared_ptr<spdlog::logger>& logger);
   void setUuid(const std::string& uuid);
-  std::string getUuid() const;
+  [[nodiscard]] std::string getUuid() const;
 
 private:
   std::string uuid_;
