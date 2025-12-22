@@ -7,11 +7,12 @@
 #include <memory>
 
 #include "spdlog/spdlog.h"
+#include "Time/TimeKeeper.hpp"
 
 
 class Player {
 public:
-  Player(const std::string& name, int age, const std::shared_ptr<spdlog::logger>& logger);
+  Player(const std::string& name, int age, const std::shared_ptr<TimeKeeper>& timeKeeper, const std::shared_ptr<spdlog::logger>& logger);
   void setUuid(const std::string& uuid);
   [[nodiscard]] std::string getUuid() const;
 
@@ -19,11 +20,14 @@ public:
   [[nodiscard]] int getAge() const;
 
 private:
+  void updateAge();
+
   std::string uuid_;
 
   std::string name_;
   int age_;
   std::shared_ptr<spdlog::logger> logger_;
+  std::shared_ptr<TimeKeeper> timeKeeper_;
 };
 
 

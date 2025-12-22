@@ -10,8 +10,8 @@
 Club::Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, ModelStorage* modelStorage, const std::shared_ptr<spdlog::logger>& logger) : name_(name), timeKeeper_(timeKeeper), logger_(logger), tactic_(std::make_unique<Tactic>())
 {
   logger_->info("Creating club: {}", name_);
-  timeKeeper_->scheduleEvent(0, [this, modelStorage]() { this->handleTraining(modelStorage); });
-  timeKeeper_->scheduleEvent(0, [this, modelStorage]() { this->handleTransfers(modelStorage); });
+  //timeKeeper_->scheduleEvent(0, [this, modelStorage]() { this->handleTraining(modelStorage); });
+  //timeKeeper_->scheduleEvent(0, [this, modelStorage]() { this->handleTransfers(modelStorage); });
 }
 
 void Club::setUuid(const std::string& uuid)

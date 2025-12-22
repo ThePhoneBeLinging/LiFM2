@@ -4,8 +4,9 @@
 
 #include "Player.hpp"
 
-Player::Player(const std::string& name, int age, const std::shared_ptr<spdlog::logger>& logger) : name_(name), age_(age), logger_(logger)
+Player::Player(const std::string& name, int age, const std::shared_ptr<TimeKeeper>& timeKeeper, const std::shared_ptr<spdlog::logger>& logger) : name_(name), age_(age), logger_(logger), timeKeeper_(timeKeeper)
 {
+  updateAge();
 }
 
 void Player::setUuid(const std::string& uuid)
@@ -26,4 +27,13 @@ std::string Player::getName() const
 int Player::getAge() const
 {
   return age_;
+}
+
+void Player::updateAge()
+{
+  timeKeeper_->scheduleEvent(timeKeeper_->getCurrentSeconds() + 31536000, [this]() {
+    age_ += 1;
+    logger_->info("Player {} has turned {} years old.", name_, age_);
+    updateAge();
+  });
 }

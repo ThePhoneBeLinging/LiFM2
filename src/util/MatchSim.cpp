@@ -40,7 +40,7 @@ void MatchSim::simulateMatch(ModelStorage* modelStorage, const std::shared_ptr<T
   {
     auto homePlayers = homeTactic->activePlayers_;
     auto homePlayerIt = homePlayers.begin();
-    std::advance(homePlayerIt, RandomNumberGenerator::randomInt(0,11));
+    std::advance(homePlayerIt, RandomNumberGenerator::randomInt(0,10));
     logger->info("Player {} scored for {}", modelStorage->getPlayer(*homePlayerIt)->getName(), homeClub->getName());
     match.homeGoals++;
   }
@@ -48,7 +48,7 @@ void MatchSim::simulateMatch(ModelStorage* modelStorage, const std::shared_ptr<T
   {
     auto awayPlayers = awayTactic->activePlayers_;
     auto awayPlayerIt = awayPlayers.begin();
-    std::advance(awayPlayerIt, RandomNumberGenerator::randomInt(0,11));
+    std::advance(awayPlayerIt, RandomNumberGenerator::randomInt(0,10));
     logger->info("Player {} scored for {}", modelStorage->getPlayer(*awayPlayerIt)->getName(), awayClub->getName());
     match.awayGoals++;
   }
