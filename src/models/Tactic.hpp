@@ -10,6 +10,7 @@
 
 enum class Position
 {
+  GOALKEEPER,
   LEFT_BACK,
   RIGHT_BACK,
   CENTER_BACK,
