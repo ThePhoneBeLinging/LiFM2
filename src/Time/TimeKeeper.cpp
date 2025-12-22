@@ -3,7 +3,6 @@
 //
 
 #include "TimeKeeper.hpp"
-#include <utility>
 #include "util/ModelStorage.hpp"
 
 TimeKeeper::TimeKeeper(const std::shared_ptr<spdlog::logger>& logger) : logger_(logger)
