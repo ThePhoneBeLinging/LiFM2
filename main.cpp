@@ -5,7 +5,6 @@
 
 int main()
 {
-  ConfigController::loadConfig("../config.json");
   auto game = LiFM();
   game.launch();
   return 0;
