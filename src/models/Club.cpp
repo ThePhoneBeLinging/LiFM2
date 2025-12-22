@@ -24,10 +24,7 @@ void Club::setUuid(const std::string& uuid)
 void Club::addPlayer(const std::string& playerId)
 {
   playerIds_.insert(playerId);
-  if (tactic_->activePlayers_.size() < 11)
-  {
-    tactic_->activePlayers_.insert(playerId);
-  }
+  tactic_->setPlayerPosition(playerId, Position::LEFT_BACK);
 }
 
 void Club::removePlayer(const std::string& playerId)
