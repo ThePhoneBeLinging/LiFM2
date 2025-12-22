@@ -4,8 +4,10 @@
 
 #include "MockDataCreator.hpp"
 
+#include "RandomNumberGenerator.hpp"
+
 std::string MockDataCreator::createSuperliga(const std::shared_ptr<TimeKeeper>& timeKeeper, ModelStorage* modelStorage,
-  const std::shared_ptr<spdlog::logger>& logger)
+                                             const std::shared_ptr<spdlog::logger>& logger)
 {
   auto league = std::make_shared<League>("Danish Superliga", timeKeeper, modelStorage, logger);
   modelStorage->addLeague(league);
@@ -22,5 +24,23 @@ std::string MockDataCreator::createSuperliga(const std::shared_ptr<TimeKeeper>& 
   brondby->setLeague(league->getUuid());
   copenhagen->setLeague(league->getUuid());
   midtjylland->setLeague(league->getUuid());
+
+  for (int i = 0; i < 25; i++)
+  {
+    brondby->addPlayer(createRandomPlayer(modelStorage, logger));
+    copenhagen->addPlayer(createRandomPlayer(modelStorage, logger));
+    midtjylland->addPlayer(createRandomPlayer(modelStorage, logger));
+  }
+
   return league->getUuid();
+}
+
+std::string MockDataCreator::createRandomPlayer(ModelStorage* modelStorage,
+  const std::shared_ptr<spdlog::logger>& logger)
+{
+  static int counter = 1;
+  auto playerName = "Player_" + std::to_string(counter++);
+  auto player = std::make_shared<Player>(playerName, RandomNumberGenerator::randomInt(16,45), logger);
+  modelStorage->addPlayer(player);
+  return player->getUuid();
 }

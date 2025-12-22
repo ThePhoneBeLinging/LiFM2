@@ -12,6 +12,10 @@ void MatchSim::simulateMatch(ModelStorage* modelStorage, const std::shared_ptr<T
   match.matchTimeSeconds++;
   auto homeClub = modelStorage->getClub(match.homeClubId);
   auto awayClub = modelStorage->getClub(match.awayClubId);
+
+  auto homeTactic = homeClub->getTactic();
+  auto awayTactic = awayClub->getTactic();
+
   if (match.matchTimeSeconds >= 90 * 60)
   {
     logger->info("Match ended {} : {} between {} and {}", match.homeGoals, match.awayGoals ,homeClub->getName(), awayClub->getName());
@@ -34,12 +38,18 @@ void MatchSim::simulateMatch(ModelStorage* modelStorage, const std::shared_ptr<T
   int randomInt = RandomNumberGenerator::randomInt(0, 3600); // Average of 3 goals per 90 minutes
   if (randomInt == 0)
   {
-    logger->info("Goal for home team!");
+    auto homePlayers = homeTactic->activePlayers_;
+    auto homePlayerIt = homePlayers.begin();
+    std::advance(homePlayerIt, RandomNumberGenerator::randomInt(0,11));
+    logger->info("Player {} scored for {}", modelStorage->getPlayer(*homePlayerIt)->getName(), homeClub->getName());
     match.homeGoals++;
   }
   else if (randomInt == 1)
   {
-    logger->info("Goal for away team!");
+    auto awayPlayers = awayTactic->activePlayers_;
+    auto awayPlayerIt = awayPlayers.begin();
+    std::advance(awayPlayerIt, RandomNumberGenerator::randomInt(0,11));
+    logger->info("Player {} scored for {}", modelStorage->getPlayer(*awayPlayerIt)->getName(), awayClub->getName());
     match.awayGoals++;
   }
 

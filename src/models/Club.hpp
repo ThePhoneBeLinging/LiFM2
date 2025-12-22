@@ -6,6 +6,8 @@
 #define CLUB_HPP
 #include <string>
 #include <unordered_set>
+
+#include "Tactic.hpp"
 #include "Time/TimeKeeper.hpp"
 
 class ModelStorage;
@@ -21,6 +23,7 @@ public:
   std::string getLeagueId();
   std::vector<std::string> getPlayerIds();
   std::string getName() const;
+  Tactic* getTactic();
 
   void handleTraining(ModelStorage* modelStorage);
   void handleTransfers(ModelStorage* modelStorage);
@@ -32,6 +35,7 @@ private:
   std::string name_;
   std::shared_ptr<TimeKeeper> timeKeeper_;
   std::shared_ptr<spdlog::logger> logger_;
+  std::unique_ptr<Tactic> tactic_;
 };
 
 

@@ -7,7 +7,7 @@
 
 #include "util/ModelStorage.hpp"
 
-Club::Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, ModelStorage* modelStorage, const std::shared_ptr<spdlog::logger>& logger) : name_(name), timeKeeper_(timeKeeper), logger_(logger)
+Club::Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, ModelStorage* modelStorage, const std::shared_ptr<spdlog::logger>& logger) : name_(name), timeKeeper_(timeKeeper), logger_(logger), tactic_(std::make_unique<Tactic>())
 {
   logger_->info("Creating club: {}", name_);
   timeKeeper_->scheduleEvent(0, [this, modelStorage]() { this->handleTraining(modelStorage); });
@@ -22,6 +22,10 @@ void Club::setUuid(const std::string& uuid)
 void Club::addPlayer(const std::string& playerId)
 {
   playerIds_.insert(playerId);
+  if (tactic_->activePlayers_.size() < 11)
+  {
+    tactic_->activePlayers_.insert(playerId);
+  }
 }
 
 void Club::removePlayer(const std::string& playerId)
@@ -52,6 +56,11 @@ std::vector<std::string> Club::getPlayerIds()
 std::string Club::getName() const
 {
   return name_;
+}
+
+Tactic* Club::getTactic()
+{
+  return tactic_.get();
 }
 
 void Club::handleTraining(ModelStorage* modelStorage)

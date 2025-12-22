@@ -21,6 +21,7 @@ add_library(LibLiFM
         util/MatchSim.hpp
         util/RandomNumberGenerator.hpp
         models/Match.hpp
+        models/Tactic.hpp
 
 )
 

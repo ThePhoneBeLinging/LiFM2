@@ -15,6 +15,9 @@ public:
   void setUuid(const std::string& uuid);
   [[nodiscard]] std::string getUuid() const;
 
+  [[nodiscard]] std::string getName() const;
+  [[nodiscard]] int getAge() const;
+
 private:
   std::string uuid_;
 

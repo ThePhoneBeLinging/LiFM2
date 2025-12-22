@@ -17,3 +17,13 @@ std::string Player::getUuid() const
 {
   return uuid_;
 }
+
+std::string Player::getName() const
+{
+  return name_;
+}
+
+int Player::getAge() const
+{
+  return age_;
+}
