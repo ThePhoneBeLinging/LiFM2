@@ -20,6 +20,11 @@ void TimeKeeper::advance()
   seconds_ = nextEvent.gameSeconds_;
   nextEvent.callback_();
   events_.pop();
+  const auto nextNextEvent = events_.top();
+  if (nextNextEvent.gameSeconds_ <= seconds_)
+  {
+    advance();
+  }
 }
 
 void TimeKeeper::scheduleEvent(const int64_t atSeconds, const std::function<void()>& callback)
