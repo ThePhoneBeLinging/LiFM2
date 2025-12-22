@@ -12,7 +12,7 @@ ModelStorage::ModelStorage(const std::shared_ptr<spdlog::logger>& logger) : logg
 
 void ModelStorage::addClub(const std::shared_ptr<Club>& club)
 {
-  if (club->getUuid() == "")
+  if (club->getUuid().empty())
   {
     auto uuid = generateUuid();
     club->setUuid(uuid);
@@ -23,7 +23,7 @@ void ModelStorage::addClub(const std::shared_ptr<Club>& club)
 
 void ModelStorage::addPlayer(const std::shared_ptr<Player>& player)
 {
-  if (player->getUuid() == "")
+  if (player->getUuid().empty())
   {
     auto uuid = generateUuid();
     player->setUuid(uuid);
@@ -34,7 +34,7 @@ void ModelStorage::addPlayer(const std::shared_ptr<Player>& player)
 
 void ModelStorage::addLeague(const std::shared_ptr<League>& league)
 {
-  if (league->getUuid() == "")
+  if (league->getUuid().empty())
   {
     auto uuid = generateUuid();
     league->setUuid(uuid);
