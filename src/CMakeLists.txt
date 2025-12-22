@@ -22,7 +22,10 @@ add_library(LibLiFM
         util/RandomNumberGenerator.hpp
         models/Match.hpp
         models/Tactic.hpp
-
+        models/Transfer/TransferOffer.cpp
+        models/Transfer/TransferOffer.hpp
+        models/Transfer/TransferDetails.cpp
+        models/Transfer/TransferDetails.hpp
 )
 
 target_include_directories(LibLiFM PRIVATE .)

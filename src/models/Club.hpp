@@ -8,12 +8,16 @@
 #include <unordered_set>
 
 #include "Tactic.hpp"
+#include "Transfer/TransferOffer.hpp"
 #include "Time/TimeKeeper.hpp"
 
 class ModelStorage;
-class Club {
+
+class Club
+{
 public:
-  explicit Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, ModelStorage* modelStorage, const std::shared_ptr<spdlog::logger>& logger);
+  explicit Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, ModelStorage* modelStorage,
+                const std::shared_ptr<spdlog::logger>& logger);
   void setUuid(const std::string& uuid);
   void addPlayer(const std::string& playerId);
   void removePlayer(const std::string& playerId);
@@ -24,11 +28,10 @@ public:
   std::vector<std::string> getPlayerIds();
   std::string getName() const;
   Tactic* getTactic();
-
-  void handleTraining(ModelStorage* modelStorage);
-  void handleTransfers(ModelStorage* modelStorage);
+  void handleTransferOffer(const std::shared_ptr<TransferOffer>& offer, ModelStorage* modelStorage);
 
 private:
+  void handleTraining(ModelStorage* modelStorage);
   std::string uuid_;
   std::string leagueId_;
   std::unordered_set<std::string> playerIds_;
@@ -37,7 +40,6 @@ private:
   std::shared_ptr<spdlog::logger> logger_;
   std::unique_ptr<Tactic> tactic_;
 };
-
 
 
 #endif //CLUB_HPP

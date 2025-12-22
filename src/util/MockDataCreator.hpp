@@ -9,13 +9,17 @@
 #include "ModelStorage.hpp"
 
 
-class MockDataCreator {
+class MockDataCreator
+{
 public:
-  static std::string createSuperliga(const std::shared_ptr<TimeKeeper>& timeKeeper, ModelStorage* modelStorage, const std::shared_ptr<spdlog::logger>& logger);
-private:
-  static std::string createRandomPlayer(ModelStorage* modelStorage, const std::shared_ptr<TimeKeeper>& timeKeeper ,const std::shared_ptr<spdlog::logger>& logger);
-};
+  static std::string createSuperliga(const std::shared_ptr<TimeKeeper>& timeKeeper, ModelStorage* modelStorage,
+                                     const std::shared_ptr<spdlog::logger>& logger);
 
+private:
+  static std::string createRandomPlayer(const std::string& clubId, ModelStorage* modelStorage,
+                                        const std::shared_ptr<TimeKeeper>& timeKeeper,
+                                        const std::shared_ptr<spdlog::logger>& logger);
+};
 
 
 #endif //MOCKDATACREATOR_HPP

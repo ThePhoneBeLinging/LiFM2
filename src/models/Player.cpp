@@ -19,6 +19,16 @@ std::string Player::getUuid() const
   return uuid_;
 }
 
+void Player::setClubId(const std::string& clubId)
+{
+  clubId_ = clubId;
+}
+
+std::string Player::getClubId() const
+{
+  return clubId_;
+}
+
 std::string Player::getName() const
 {
   return name_;

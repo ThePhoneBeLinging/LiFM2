@@ -7,7 +7,9 @@
 
 #include "util/ModelStorage.hpp"
 
-Club::Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, ModelStorage* modelStorage, const std::shared_ptr<spdlog::logger>& logger) : name_(name), timeKeeper_(timeKeeper), logger_(logger), tactic_(std::make_unique<Tactic>())
+Club::Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, ModelStorage* modelStorage,
+           const std::shared_ptr<spdlog::logger>& logger) : name_(name), timeKeeper_(timeKeeper), logger_(logger),
+                                                            tactic_(std::make_unique<Tactic>())
 {
   logger_->info("Creating club: {}", name_);
   //timeKeeper_->scheduleEvent(0, [this, modelStorage]() { this->handleTraining(modelStorage); });
@@ -63,12 +65,13 @@ Tactic* Club::getTactic()
   return tactic_.get();
 }
 
-void Club::handleTraining(ModelStorage* modelStorage)
+void Club::handleTransferOffer(const std::shared_ptr<TransferOffer>& offer, ModelStorage* modelStorage)
 {
-  timeKeeper_->scheduleEvent(timeKeeper_->getCurrentSeconds() + 10, [this, modelStorage]() { this->handleTraining(modelStorage); });
+  logger_->info("Handling transfer Offer: {}", offer->getPlayerId());
 }
 
-void Club::handleTransfers(ModelStorage* modelStorage)
+void Club::handleTraining(ModelStorage* modelStorage)
 {
-  timeKeeper_->scheduleEvent(timeKeeper_->getCurrentSeconds() + 20, [this, modelStorage]() { this->handleTransfers(modelStorage); });
+  timeKeeper_->scheduleEvent(timeKeeper_->getCurrentSeconds() + 10,
+                             [this, modelStorage]() { this->handleTraining(modelStorage); });
 }
