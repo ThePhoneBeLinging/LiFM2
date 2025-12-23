@@ -26,6 +26,7 @@ add_library(LibLiFM
         models/Transfer/TransferOffer.hpp
         models/Transfer/TransferDetails.cpp
         models/Transfer/TransferDetails.hpp
+        models/Transfer/TransferState.hpp
 )
 
 target_include_directories(LibLiFM PRIVATE .)

@@ -29,6 +29,7 @@ public:
   [[nodiscard]] std::string getName() const;
   Tactic* getTactic();
   void handleTransferOffer(const std::string& transferOfferId, ModelStorage* modelStorage);
+  void handleTransferOfferReply(const std::string& transferOfferId, bool accepted, ModelStorage* modelStorage);
 
 private:
   void handleTraining(ModelStorage* modelStorage);

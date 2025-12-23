@@ -66,6 +66,20 @@ void Club::handleTransferOffer(const std::string& transferOfferId, ModelStorage*
 {
   auto offer = modelStorage->getTransferOffer(transferOfferId);
   logger_->info("Handling transfer Offer: {}", offer->getPlayerId());
+
+  timeKeeper_->scheduleEvent(timeKeeper_->getCurrentSeconds(), [transferOfferId, modelStorage, offer]()
+  {
+    auto toClubId = offer->getToClubId();
+    auto toClub = modelStorage->getClub(toClubId);
+    offer->setState(TransferState::ACCEPTED);
+    toClub->handleTransferOfferReply(transferOfferId, true, modelStorage);
+  });
+}
+
+void Club::handleTransferOfferReply(const std::string& transferOfferId, bool accepted, ModelStorage* modelStorage)
+{
+  auto offer = modelStorage->getTransferOffer(transferOfferId);
+  logger_->info("Looking at reply: {}", offer->getPlayerId());
 }
 
 void Club::handleTraining(ModelStorage* modelStorage)
