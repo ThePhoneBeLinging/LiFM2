@@ -28,7 +28,7 @@ struct Tactic
 public:
   bool setPlayerPosition(const std::string& playerId, Position position)
   {
-    if (activePlayers_.size() >= 11)
+    if (activePlayers_.size() >= 11 && not activePlayers_.contains(playerId))
     {
       return false;
     }
@@ -54,9 +54,9 @@ public:
     return true;
   }
 
-  std::vector<std::string> getActivePlayers() const
+  [[nodiscard]] std::vector<std::string> getActivePlayers() const
   {
-    return std::vector<std::string>(activePlayers_.begin(), activePlayers_.end());
+    return {activePlayers_.begin(), activePlayers_.end()};
   }
 
 private:
