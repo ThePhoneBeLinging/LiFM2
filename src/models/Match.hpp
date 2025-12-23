@@ -5,6 +5,7 @@
 #ifndef MATCH_HPP
 #define MATCH_HPP
 #include <memory>
+#include <string>
 
 struct Match
 {
