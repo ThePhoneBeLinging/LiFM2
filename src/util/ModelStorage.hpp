@@ -11,17 +11,21 @@
 #include "models/Player.hpp"
 
 
-class ModelStorage {
+class ModelStorage
+{
 public:
   explicit ModelStorage(const std::shared_ptr<spdlog::logger>& logger);
   void addClub(const std::shared_ptr<Club>& club);
   void addPlayer(const std::shared_ptr<Player>& player);
   void addLeague(const std::shared_ptr<League>& league);
+  void addTransferOffer(const std::shared_ptr<TransferOffer>& offer);
 
   std::shared_ptr<Club> getClub(const std::string& uuid);
   std::shared_ptr<Player> getPlayer(const std::string& uuid);
   std::shared_ptr<League> getLeague(const std::string& uuid);
+  std::shared_ptr<TransferOffer> getTransferOffer(const std::string& uuid);
 
+  [[nodiscard]] std::vector<std::shared_ptr<TransferOffer>> getTransferOffers() const;
 
 private:
   static std::string generateUuid();
@@ -31,8 +35,8 @@ private:
   std::unordered_map<std::string, std::shared_ptr<Club>> clubs_;
   std::unordered_map<std::string, std::shared_ptr<Player>> players_;
   std::unordered_map<std::string, std::shared_ptr<League>> leagues_;
+  std::unordered_map<std::string, std::shared_ptr<TransferOffer>> transferOffers_;
 };
-
 
 
 #endif //MODELSTORAGE_HPP

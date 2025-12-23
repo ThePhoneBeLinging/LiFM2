@@ -23,12 +23,12 @@ public:
   void removePlayer(const std::string& playerId);
   void setLeague(const std::string& leagueId);
 
-  std::string getUuid() const;
+  [[nodiscard]] std::string getUuid() const;
   std::string getLeagueId();
   std::vector<std::string> getPlayerIds();
-  std::string getName() const;
+  [[nodiscard]] std::string getName() const;
   Tactic* getTactic();
-  void handleTransferOffer(const std::shared_ptr<TransferOffer>& offer, ModelStorage* modelStorage);
+  void handleTransferOffer(const std::string& transferOfferId, ModelStorage* modelStorage);
 
 private:
   void handleTraining(ModelStorage* modelStorage);

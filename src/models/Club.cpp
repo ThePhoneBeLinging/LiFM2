@@ -62,8 +62,9 @@ Tactic* Club::getTactic()
   return tactic_.get();
 }
 
-void Club::handleTransferOffer(const std::shared_ptr<TransferOffer>& offer, ModelStorage* modelStorage)
+void Club::handleTransferOffer(const std::string& transferOfferId, ModelStorage* modelStorage)
 {
+  auto offer = modelStorage->getTransferOffer(transferOfferId);
   logger_->info("Handling transfer Offer: {}", offer->getPlayerId());
 }
 

@@ -10,6 +10,16 @@ TransferOffer::TransferOffer(const std::string& playerId, const std::string& toC
 {
 }
 
+void TransferOffer::setUuid(const std::string& uuid)
+{
+  uuid_ = uuid;
+}
+
+std::string TransferOffer::getUuid() const
+{
+  return uuid_;
+}
+
 std::string TransferOffer::getPlayerId() const
 {
   return playerId_;

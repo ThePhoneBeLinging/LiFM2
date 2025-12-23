@@ -43,6 +43,17 @@ void ModelStorage::addLeague(const std::shared_ptr<League>& league)
   logger_->info("Added League with UUID: {}", league->getUuid());
 }
 
+void ModelStorage::addTransferOffer(const std::shared_ptr<TransferOffer>& offer)
+{
+  if (offer->getUuid().empty())
+  {
+    auto uuid = generateUuid();
+    offer->setUuid(uuid);
+  }
+  transferOffers_[offer->getUuid()] = offer;
+  logger_->info("Added TransferOffer with UUID: {}", offer->getUuid());
+}
+
 std::shared_ptr<Club> ModelStorage::getClub(const std::string& uuid)
 {
   return clubs_.at(uuid);
@@ -56,6 +67,22 @@ std::shared_ptr<Player> ModelStorage::getPlayer(const std::string& uuid)
 std::shared_ptr<League> ModelStorage::getLeague(const std::string& uuid)
 {
   return leagues_.at(uuid);
+}
+
+std::shared_ptr<TransferOffer> ModelStorage::getTransferOffer(const std::string& uuid)
+{
+  return transferOffers_.at(uuid);
+}
+
+std::vector<std::shared_ptr<TransferOffer>> ModelStorage::getTransferOffers() const
+{
+  std::vector<std::shared_ptr<TransferOffer>> offers;
+  offers.reserve(transferOffers_.size());
+  for (const auto& transferOffer : transferOffers_)
+  {
+    offers.push_back(transferOffer.second);
+  }
+  return offers;
 }
 
 std::string ModelStorage::generateUuid()
