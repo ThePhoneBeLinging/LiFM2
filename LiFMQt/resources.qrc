@@ -1,0 +1,6 @@
+<!DOCTYPE RCC>
+<RCC>
+    <qresource prefix="/">
+        <file>Views/main.qml</file>
+    </qresource>
+</RCC>

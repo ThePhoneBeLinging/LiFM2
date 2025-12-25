@@ -1,8 +1,8 @@
-#include "LiFM/LiFM.hpp"
+#include "LiFMQt/LiFMQt.hpp"
 
 int main()
 {
-  auto game = LiFM();
-  game.launch();
+  auto qtApp = LiFMQt();
+  qtApp.launch();
   return 0;
 }

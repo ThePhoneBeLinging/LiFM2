@@ -1,14 +1,18 @@
 cmake_minimum_required(VERSION 3.31)
-project(LiFM)
+project(LiFMQt)
 
 set(CMAKE_CXX_STANDARD 23)
 
-#find_package(Qt6 6.5 COMPONENTS Quick REQUIRED)
-#qt_standard_project_setup(REQUIRES 6.5)
-#qt_add_resources(LiFM_RESOURCES resources.qrc)
-add_executable(LiFM
-        main.cpp
-        #${LiFM_RESOURCES}
+find_package(Qt6 6.5 COMPONENTS Quick REQUIRED)
+qt_standard_project_setup(REQUIRES 6.5)
+qt_add_resources(LiFMQt_RESOURCES resources.qrc)
+
+FILE(COPY resources.qrc DESTINATION ${CMAKE_CURRENT_BINARY_DIR})
+FILE(COPY Views/ DESTINATION ${CMAKE_CURRENT_BINARY_DIR}/Views)
+
+add_library(LiFMQt
+        src/LiFMQt.cpp
+        ${LiFMQt_RESOURCES}
 )
 
 include(FetchContent)
@@ -34,12 +38,12 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(googletest)
 
-add_subdirectory(LibLiFM)
-add_subdirectory(LiFMQt)
-
-target_link_libraries(LiFM PUBLIC LibLiFM
+target_link_libraries(LiFMQt PUBLIC LibLiFM
         Utility
         spdlog::spdlog
         gtest_main
-        LiFMQt
+        Qt6::Quick
 )
+
+target_include_directories(LibLiFM PRIVATE src)
+target_include_directories(LibLiFM PUBLIC include)
