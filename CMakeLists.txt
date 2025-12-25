@@ -8,7 +8,6 @@ set(CMAKE_CXX_STANDARD 23)
 #qt_add_resources(LiFM_RESOURCES resources.qrc)
 add_executable(LiFM
         main.cpp
-        tests/LiFMLibTest.cpp
         #${LiFM_RESOURCES}
 )
 
@@ -35,8 +34,7 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(googletest)
 
-add_subdirectory(src)
-add_subdirectory(tests)
+add_subdirectory(LibLiFM)
 
 target_link_libraries(LiFM PUBLIC LibLiFM
         Utility

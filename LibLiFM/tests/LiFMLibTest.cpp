@@ -3,6 +3,7 @@
 //
 
 #include "gtest/gtest.h"
+#include "models/Tactics/Tactic.hpp"
 #include "LiFM/LiFM.hpp"
 
 class LiFMLibTest : public ::testing::Test
