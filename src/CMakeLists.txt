@@ -21,12 +21,15 @@ add_library(LibLiFM
         util/MatchSim.hpp
         util/RandomNumberGenerator.hpp
         models/Match.hpp
-        models/Tactic.hpp
+        models/Tactics/Tactic.hpp
         models/Transfer/TransferOffer.cpp
         models/Transfer/TransferOffer.hpp
         models/Transfer/TransferDetails.cpp
         models/Transfer/TransferDetails.hpp
         models/Transfer/TransferState.hpp
+        models/Tactics/Positions/Position.hpp
+        models/Tactics/Positions/LeftBack.cpp
+        models/Tactics/Positions/LeftBack.hpp
 )
 
 target_include_directories(LibLiFM PRIVATE .)

@@ -8,6 +8,7 @@ set(CMAKE_CXX_STANDARD 23)
 #qt_add_resources(LiFM_RESOURCES resources.qrc)
 add_executable(LiFM
         main.cpp
+        tests/LiFMLibTest.cpp
         #${LiFM_RESOURCES}
 )
 
@@ -26,10 +27,19 @@ FetchContent_Declare(
 )
 FetchContent_MakeAvailable(spdlog)
 
-add_subdirectory(src)
+FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG release-1.12.1  # Specify the version you need
+)
 
+FetchContent_MakeAvailable(googletest)
+
+add_subdirectory(src)
+add_subdirectory(tests)
 
 target_link_libraries(LiFM PUBLIC LibLiFM
-    Utility
-    spdlog::spdlog
+        Utility
+        spdlog::spdlog
+        gtest_main
 )

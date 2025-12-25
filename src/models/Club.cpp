@@ -5,6 +5,7 @@
 #include "Club.hpp"
 #include <iostream>
 
+#include "Tactics/Positions/LeftBack.hpp"
 #include "util/ModelStorage.hpp"
 
 Club::Club(const std::string& name, const std::shared_ptr<TimeKeeper>& timeKeeper, ModelStorage* modelStorage,
@@ -24,7 +25,8 @@ void Club::setUuid(const std::string& uuid)
 void Club::addPlayer(const std::string& playerId)
 {
   playerIds_.insert(playerId);
-  tactic_->setPlayerPosition(playerId, Position::LEFT_BACK);
+  auto position = std::make_shared<LeftBack>();
+  tactic_->setPlayerPosition(playerId, position);
 }
 
 void Club::removePlayer(const std::string& playerId)

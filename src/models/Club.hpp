@@ -7,7 +7,7 @@
 #include <string>
 #include <unordered_set>
 
-#include "Tactic.hpp"
+#include "Tactics/Tactic.hpp"
 #include "Transfer/TransferOffer.hpp"
 #include "Time/TimeKeeper.hpp"
 

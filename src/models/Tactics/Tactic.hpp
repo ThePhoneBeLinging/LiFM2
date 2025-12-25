@@ -4,29 +4,18 @@
 
 #ifndef TACTIC_HPP
 #define TACTIC_HPP
+#include <memory>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
 #include <vector>
 
-enum class Position
-{
-  GOALKEEPER,
-  LEFT_BACK,
-  RIGHT_BACK,
-  CENTER_BACK,
-  DEFENSIVE_MIDFIELDER,
-  CENTRAL_MIDFIELDER,
-  ATTACKING_MIDFIELDER,
-  LEFT_WINGER,
-  RIGHT_WINGER,
-  STRIKER,
-};
+#include "Positions/Position.hpp"
 
 struct Tactic
 {
 public:
-  bool setPlayerPosition(const std::string& playerId, Position position)
+  bool setPlayerPosition(const std::string& playerId, const std::shared_ptr<Position>& position)
   {
     if (activePlayers_.size() >= 11 && not activePlayers_.contains(playerId))
     {
@@ -61,7 +50,7 @@ public:
 
 private:
   std::unordered_set<std::string> activePlayers_;
-  std::unordered_map<std::string, Position> positions_;
+  std::unordered_map<std::string, std::shared_ptr<Position>> positions_;
 };
 
 #endif //TACTIC_HPP
