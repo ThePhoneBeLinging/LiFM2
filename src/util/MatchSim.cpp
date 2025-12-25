@@ -40,14 +40,14 @@ void MatchSim::simulateMatch(ModelStorage* modelStorage, const std::shared_ptr<T
   if (randomInt == 0)
   {
     auto homePlayers = homeTactic->getActivePlayers();
-    auto homePlayerId = homePlayers[RandomNumberGenerator::randomInt(0, 10)];
+    const auto& homePlayerId = homePlayers[RandomNumberGenerator::randomInt(0, 10)];
     logger->info("Player {} scored for {}", modelStorage->getPlayer(homePlayerId)->getName(), homeClub->getName());
     match.homeGoals++;
   }
   else if (randomInt == 1)
   {
     auto awayPlayers = awayTactic->getActivePlayers();
-    auto awayPlayerId = awayPlayers[RandomNumberGenerator::randomInt(0, 10)];
+    const auto& awayPlayerId = awayPlayers[RandomNumberGenerator::randomInt(0, 10)];
     logger->info("Player {} scored for {}", modelStorage->getPlayer(awayPlayerId)->getName(), awayClub->getName());
     match.awayGoals++;
   }
