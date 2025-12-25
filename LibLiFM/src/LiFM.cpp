@@ -24,7 +24,7 @@ void LiFM::launch()
   }
   for (const auto& club : league->getClubIds())
   {
-    auto clubModel = modelStorage->getClub(club);
+    const auto clubModel = modelStorage->getClub(club);
     logger->info("Club: {} has {} points", clubModel->getName(), league->getPoints(club));
   }
 }
