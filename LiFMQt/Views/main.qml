@@ -11,8 +11,8 @@ ApplicationWindow {
     StackView {
         id: stackView
         anchors.fill: parent
-        initialItem: Rectangle {
-            color: "steelblue"
+        initialItem: Mail {
+
         }
     }
 

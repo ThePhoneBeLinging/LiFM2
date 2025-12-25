@@ -2,5 +2,7 @@
 <RCC>
     <qresource prefix="/">
         <file>Views/main.qml</file>
+        <file>Views/Mail.qml</file>
+        <file>Views/Header.qml</file>
     </qresource>
 </RCC>
