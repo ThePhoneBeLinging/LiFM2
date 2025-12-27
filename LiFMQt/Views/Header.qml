@@ -5,7 +5,7 @@ Rectangle {
     id: header
     width: parent.width
     height: 50
-    color: "lightgray"
+    color: "#AAAAAA"
 
     Text {
         id: titleText
@@ -13,5 +13,6 @@ Rectangle {
         anchors.centerIn: parent
         font.pixelSize: 24
         font.bold: true
+        color: "#FFFFFF"
     }
 }
